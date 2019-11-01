@@ -12,9 +12,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let notification = Notification.Name("NotificationL")
+        let center = NotificationCenter.default
+        
+        let observer = center.addObserver(forName: notification, object: nil, queue: OperationQueue()) { (notification) in
+            print("Notification received")
+        }
+        
+        center.post(name: notification, object: nil)
+        
+        center.removeObserver(notification)
+        
     }
-
+    
 
 }
 
