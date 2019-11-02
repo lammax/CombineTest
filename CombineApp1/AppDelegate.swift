@@ -11,11 +11,30 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
+    var navigationController: UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Override point for customization after application launch.        let navigationController: UINavigationController = UINavigationController(rootViewController: destination)
+
+        /*window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let destinationVC: LoginSceneViewController = LoginSceneViewController(nibName: "LoginSceneViewController", bundle: nil)
+
+        let navigationController: UINavigationController = UINavigationController(rootViewController: destinationVC)
+        navigationController.isNavigationBarHidden = true
+        navigationController.view.backgroundColor = .red
+        window?.rootViewController = navigationController
+        
+        window?.backgroundColor = .blue
+        window?.makeKeyAndVisible()
+        
+        let launcher: StartSceneBusinessLogic = StartSceneConfigurator.sharedInstance.configure()
+        
+        launcher.launch(from: navigationController)*/
+        
         return true
+        
     }
 
     // MARK: UISceneSession Lifecycle

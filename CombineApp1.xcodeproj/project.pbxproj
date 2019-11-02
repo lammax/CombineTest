@@ -9,21 +9,63 @@
 /* Begin PBXBuildFile section */
 		044A10A9236C6D7C0001C79B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10A8236C6D7C0001C79B /* AppDelegate.swift */; };
 		044A10AB236C6D7C0001C79B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10AA236C6D7C0001C79B /* SceneDelegate.swift */; };
-		044A10AD236C6D7C0001C79B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10AC236C6D7C0001C79B /* ViewController.swift */; };
-		044A10B0236C6D7C0001C79B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 044A10AE236C6D7C0001C79B /* Main.storyboard */; };
 		044A10B2236C6D7D0001C79B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 044A10B1236C6D7D0001C79B /* Assets.xcassets */; };
 		044A10B5236C6D7D0001C79B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 044A10B3236C6D7D0001C79B /* LaunchScreen.storyboard */; };
+		044A10C8236D7BC40001C79B /* StartSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10C1236D7BC40001C79B /* StartSceneWorker.swift */; };
+		044A10C9236D7BC40001C79B /* StartSceneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10C2236D7BC40001C79B /* StartSceneRouter.swift */; };
+		044A10CC236D7BC40001C79B /* StartSceneInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10C5236D7BC40001C79B /* StartSceneInteractor.swift */; };
+		044A10CD236D7BC40001C79B /* StartSceneConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10C6236D7BC40001C79B /* StartSceneConfigurator.swift */; };
+		044A10D6236D7F290001C79B /* LoginScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10CF236D7F290001C79B /* LoginScenePresenter.swift */; };
+		044A10D7236D7F290001C79B /* LoginSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10D0236D7F290001C79B /* LoginSceneWorker.swift */; };
+		044A10D8236D7F290001C79B /* LoginSceneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10D1236D7F290001C79B /* LoginSceneRouter.swift */; };
+		044A10D9236D7F290001C79B /* LoginSceneModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10D2236D7F290001C79B /* LoginSceneModels.swift */; };
+		044A10DA236D7F290001C79B /* LoginSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10D3236D7F290001C79B /* LoginSceneViewController.swift */; };
+		044A10DB236D7F290001C79B /* LoginSceneInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10D4236D7F290001C79B /* LoginSceneInteractor.swift */; };
+		044A10DC236D7F290001C79B /* LoginSceneConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10D5236D7F290001C79B /* LoginSceneConfigurator.swift */; };
+		044A10E4236D7F820001C79B /* ObserverScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10DD236D7F820001C79B /* ObserverScenePresenter.swift */; };
+		044A10E5236D7F820001C79B /* ObserverSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10DE236D7F820001C79B /* ObserverSceneWorker.swift */; };
+		044A10E6236D7F820001C79B /* ObserverSceneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10DF236D7F820001C79B /* ObserverSceneRouter.swift */; };
+		044A10E7236D7F820001C79B /* ObserverSceneModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10E0236D7F820001C79B /* ObserverSceneModels.swift */; };
+		044A10E8236D7F820001C79B /* ObserverSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10E1236D7F820001C79B /* ObserverSceneViewController.swift */; };
+		044A10E9236D7F820001C79B /* ObserverSceneInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10E2236D7F820001C79B /* ObserverSceneInteractor.swift */; };
+		044A10EA236D7F820001C79B /* ObserverSceneConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10E3236D7F820001C79B /* ObserverSceneConfigurator.swift */; };
+		044A10ED236D87070001C79B /* UserDefaults+adds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10EC236D87070001C79B /* UserDefaults+adds.swift */; };
+		044A10F3236DDDF20001C79B /* UIViewController+adds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10F2236DDDF20001C79B /* UIViewController+adds.swift */; };
+		044A10F5236DE1850001C79B /* UINavigationController+adds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A10F4236DE1850001C79B /* UINavigationController+adds.swift */; };
+		04918349236DFA4500A2EF2E /* LoginSceneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04918347236DFA4500A2EF2E /* LoginSceneViewController.xib */; };
+		04F4FE51236DF273002CA605 /* ObserverSceneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4FE4F236DF273002CA605 /* ObserverSceneViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		044A10A5236C6D7C0001C79B /* CombineApp1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombineApp1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044A10A8236C6D7C0001C79B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		044A10AA236C6D7C0001C79B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		044A10AC236C6D7C0001C79B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		044A10AF236C6D7C0001C79B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		044A10B1236C6D7D0001C79B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		044A10B4236C6D7D0001C79B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		044A10B6236C6D7D0001C79B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		044A10C1236D7BC40001C79B /* StartSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneWorker.swift; sourceTree = "<group>"; };
+		044A10C2236D7BC40001C79B /* StartSceneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneRouter.swift; sourceTree = "<group>"; };
+		044A10C5236D7BC40001C79B /* StartSceneInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneInteractor.swift; sourceTree = "<group>"; };
+		044A10C6236D7BC40001C79B /* StartSceneConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneConfigurator.swift; sourceTree = "<group>"; };
+		044A10CF236D7F290001C79B /* LoginScenePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScenePresenter.swift; sourceTree = "<group>"; };
+		044A10D0236D7F290001C79B /* LoginSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneWorker.swift; sourceTree = "<group>"; };
+		044A10D1236D7F290001C79B /* LoginSceneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneRouter.swift; sourceTree = "<group>"; };
+		044A10D2236D7F290001C79B /* LoginSceneModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneModels.swift; sourceTree = "<group>"; };
+		044A10D3236D7F290001C79B /* LoginSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneViewController.swift; sourceTree = "<group>"; };
+		044A10D4236D7F290001C79B /* LoginSceneInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneInteractor.swift; sourceTree = "<group>"; };
+		044A10D5236D7F290001C79B /* LoginSceneConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneConfigurator.swift; sourceTree = "<group>"; };
+		044A10DD236D7F820001C79B /* ObserverScenePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverScenePresenter.swift; sourceTree = "<group>"; };
+		044A10DE236D7F820001C79B /* ObserverSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverSceneWorker.swift; sourceTree = "<group>"; };
+		044A10DF236D7F820001C79B /* ObserverSceneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverSceneRouter.swift; sourceTree = "<group>"; };
+		044A10E0236D7F820001C79B /* ObserverSceneModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverSceneModels.swift; sourceTree = "<group>"; };
+		044A10E1236D7F820001C79B /* ObserverSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverSceneViewController.swift; sourceTree = "<group>"; };
+		044A10E2236D7F820001C79B /* ObserverSceneInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverSceneInteractor.swift; sourceTree = "<group>"; };
+		044A10E3236D7F820001C79B /* ObserverSceneConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverSceneConfigurator.swift; sourceTree = "<group>"; };
+		044A10EC236D87070001C79B /* UserDefaults+adds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+adds.swift"; sourceTree = "<group>"; };
+		044A10F2236DDDF20001C79B /* UIViewController+adds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+adds.swift"; sourceTree = "<group>"; };
+		044A10F4236DE1850001C79B /* UINavigationController+adds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+adds.swift"; sourceTree = "<group>"; };
+		04918347236DFA4500A2EF2E /* LoginSceneViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginSceneViewController.xib; sourceTree = "<group>"; };
+		04F4FE4F236DF273002CA605 /* ObserverSceneViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObserverSceneViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +98,76 @@
 		044A10A7236C6D7C0001C79B /* CombineApp1 */ = {
 			isa = PBXGroup;
 			children = (
+				044A10EB236D86F30001C79B /* Extensions */,
+				044A10BC236D7B850001C79B /* Scenes */,
 				044A10A8236C6D7C0001C79B /* AppDelegate.swift */,
 				044A10AA236C6D7C0001C79B /* SceneDelegate.swift */,
-				044A10AC236C6D7C0001C79B /* ViewController.swift */,
-				044A10AE236C6D7C0001C79B /* Main.storyboard */,
 				044A10B1236C6D7D0001C79B /* Assets.xcassets */,
 				044A10B3236C6D7D0001C79B /* LaunchScreen.storyboard */,
 				044A10B6236C6D7D0001C79B /* Info.plist */,
 			);
 			path = CombineApp1;
+			sourceTree = "<group>";
+		};
+		044A10BC236D7B850001C79B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				044A10BF236D7BAB0001C79B /* StartScene */,
+				044A10BE236D7B990001C79B /* ObserverScene */,
+				044A10BD236D7B8F0001C79B /* LoginScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		044A10BD236D7B8F0001C79B /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				044A10CF236D7F290001C79B /* LoginScenePresenter.swift */,
+				044A10D0236D7F290001C79B /* LoginSceneWorker.swift */,
+				044A10D1236D7F290001C79B /* LoginSceneRouter.swift */,
+				044A10D2236D7F290001C79B /* LoginSceneModels.swift */,
+				044A10D3236D7F290001C79B /* LoginSceneViewController.swift */,
+				044A10D4236D7F290001C79B /* LoginSceneInteractor.swift */,
+				044A10D5236D7F290001C79B /* LoginSceneConfigurator.swift */,
+				04918347236DFA4500A2EF2E /* LoginSceneViewController.xib */,
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		044A10BE236D7B990001C79B /* ObserverScene */ = {
+			isa = PBXGroup;
+			children = (
+				044A10DD236D7F820001C79B /* ObserverScenePresenter.swift */,
+				044A10DE236D7F820001C79B /* ObserverSceneWorker.swift */,
+				044A10DF236D7F820001C79B /* ObserverSceneRouter.swift */,
+				044A10E0236D7F820001C79B /* ObserverSceneModels.swift */,
+				044A10E1236D7F820001C79B /* ObserverSceneViewController.swift */,
+				044A10E2236D7F820001C79B /* ObserverSceneInteractor.swift */,
+				044A10E3236D7F820001C79B /* ObserverSceneConfigurator.swift */,
+				04F4FE4F236DF273002CA605 /* ObserverSceneViewController.xib */,
+			);
+			path = ObserverScene;
+			sourceTree = "<group>";
+		};
+		044A10BF236D7BAB0001C79B /* StartScene */ = {
+			isa = PBXGroup;
+			children = (
+				044A10C1236D7BC40001C79B /* StartSceneWorker.swift */,
+				044A10C2236D7BC40001C79B /* StartSceneRouter.swift */,
+				044A10C5236D7BC40001C79B /* StartSceneInteractor.swift */,
+				044A10C6236D7BC40001C79B /* StartSceneConfigurator.swift */,
+			);
+			path = StartScene;
+			sourceTree = "<group>";
+		};
+		044A10EB236D86F30001C79B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				044A10EC236D87070001C79B /* UserDefaults+adds.swift */,
+				044A10F2236DDDF20001C79B /* UIViewController+adds.swift */,
+				044A10F4236DE1850001C79B /* UINavigationController+adds.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,8 +229,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				044A10B5236C6D7D0001C79B /* LaunchScreen.storyboard in Resources */,
+				04F4FE51236DF273002CA605 /* ObserverSceneViewController.xib in Resources */,
 				044A10B2236C6D7D0001C79B /* Assets.xcassets in Resources */,
-				044A10B0236C6D7C0001C79B /* Main.storyboard in Resources */,
+				04918349236DFA4500A2EF2E /* LoginSceneViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +242,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				044A10AD236C6D7C0001C79B /* ViewController.swift in Sources */,
+				044A10E5236D7F820001C79B /* ObserverSceneWorker.swift in Sources */,
+				044A10F5236DE1850001C79B /* UINavigationController+adds.swift in Sources */,
+				044A10DC236D7F290001C79B /* LoginSceneConfigurator.swift in Sources */,
+				044A10ED236D87070001C79B /* UserDefaults+adds.swift in Sources */,
+				044A10D6236D7F290001C79B /* LoginScenePresenter.swift in Sources */,
+				044A10D8236D7F290001C79B /* LoginSceneRouter.swift in Sources */,
+				044A10C9236D7BC40001C79B /* StartSceneRouter.swift in Sources */,
+				044A10D7236D7F290001C79B /* LoginSceneWorker.swift in Sources */,
+				044A10E4236D7F820001C79B /* ObserverScenePresenter.swift in Sources */,
+				044A10D9236D7F290001C79B /* LoginSceneModels.swift in Sources */,
+				044A10E9236D7F820001C79B /* ObserverSceneInteractor.swift in Sources */,
+				044A10E7236D7F820001C79B /* ObserverSceneModels.swift in Sources */,
+				044A10C8236D7BC40001C79B /* StartSceneWorker.swift in Sources */,
+				044A10CD236D7BC40001C79B /* StartSceneConfigurator.swift in Sources */,
+				044A10DB236D7F290001C79B /* LoginSceneInteractor.swift in Sources */,
+				044A10DA236D7F290001C79B /* LoginSceneViewController.swift in Sources */,
+				044A10CC236D7BC40001C79B /* StartSceneInteractor.swift in Sources */,
+				044A10F3236DDDF20001C79B /* UIViewController+adds.swift in Sources */,
+				044A10E6236D7F820001C79B /* ObserverSceneRouter.swift in Sources */,
+				044A10EA236D7F820001C79B /* ObserverSceneConfigurator.swift in Sources */,
+				044A10E8236D7F820001C79B /* ObserverSceneViewController.swift in Sources */,
 				044A10A9236C6D7C0001C79B /* AppDelegate.swift in Sources */,
 				044A10AB236C6D7C0001C79B /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +271,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		044A10AE236C6D7C0001C79B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				044A10AF236C6D7C0001C79B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		044A10B3236C6D7D0001C79B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -291,7 +407,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.realitykit.CombineApp1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.combine.combineapp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -309,7 +425,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.realitykit.CombineApp1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.combine.combineapp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
