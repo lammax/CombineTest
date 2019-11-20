@@ -20,8 +20,13 @@ protocol ObserverSceneDisplayLogic: class {
 class ObserverSceneViewController: UIViewController {
     var interactor: ObserverSceneBusinessLogic?
     var router: (NSObjectProtocol & ObserverSceneRoutingLogic & ObserverSceneDataPassing)?
+    
+    private var currentTFTag: Int = 0
 
-    @IBOutlet weak var verifyCodeTextField: UITextField!
+    @IBOutlet weak var vcTF1: UITextField!
+    @IBOutlet weak var vcTF2: UITextField!
+    @IBOutlet weak var vcTF3: UITextField!
+    @IBOutlet weak var vcTF4: UITextField!
     
     // MARK: Object lifecycle
 
@@ -76,14 +81,41 @@ class ObserverSceneViewController: UIViewController {
         center.removeObserver(notification)
         
         if #available(iOS 12.0, *) {
-            self.verifyCodeTextField.textContentType = .oneTimeCode
-            self.verifyCodeTextField.keyboardType = .numberPad
+            self.vcTF1.textContentType = .oneTimeCode
+            self.vcTF1.keyboardType = .numberPad
+        }
+
+        self.vcTF1.delegate = self
+        self.vcTF2.delegate = self
+        self.vcTF3.delegate = self
+        self.vcTF4.delegate = self
+        
+    }
+
+    private func fillCodeFields(codeCharacter: String) {
+        currentTFTag += 1
+        if currentTFTag > 1, let currentTF = view.viewWithTag(currentTFTag) as? UITextField {
+            currentTF.text = codeCharacter
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.setActiveTextField(currentTF)
+            }
         }
     }
-  
+    
+    private func setActiveTextField(_ textField: UITextField) {
+        let nextTag = textField.tag + 1
+
+        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+            print("Finish code entering")
+        }
+    }
+
     @IBAction func buttonClicked(_ sender: UIButton) {
         let messageVC = MFMessageComposeViewController()
-               messageVC.body = "Verification code: 12345";
+               messageVC.body = "Verification code: 1234";
                messageVC.recipients = ["89024672586"]
                messageVC.messageComposeDelegate = self
                self.present(messageVC, animated: true, completion: nil)
@@ -119,3 +151,28 @@ extension ObserverSceneViewController: ObserverSceneDisplayLogic {
 
 }
 
+extension ObserverSceneViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.setActiveTextField(textField)
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField.tag == 1, string.count > 0 {
+            self.fillCodeFields(codeCharacter: string)
+        }
+        
+        // get the current text, or use an empty string if that failed
+        let currentText = textField.text ?? ""
+
+        // attempt to read the range they are trying to change, or exit if we can't
+        guard let stringRange = Range(range, in: currentText) else { return false }
+
+        // add their new text to the existing text
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        // make sure the result is under 1 character
+        return updatedText.count <= 1
+    }
+}
