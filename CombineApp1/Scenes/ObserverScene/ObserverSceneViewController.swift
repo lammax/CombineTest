@@ -28,7 +28,7 @@ class StringSubscriber: Subscriber {
     
     func receive(_ input: String) -> Subscribers.Demand {
         print("Received value:", input)
-        return .none
+        return .max(1)
     }
     
     func receive(completion: Subscribers.Completion<ObserverScene.MyError>) {
@@ -135,9 +135,20 @@ class ObserverSceneViewController: UIViewController {
         let subscriber = StringSubscriber()
         let subject = PassthroughSubject<String, ObserverScene.MyError>()
         subject.subscribe(subscriber)
+        
+        let subscription = subject.sink(receiveCompletion: { (completion) in
+            print("received completion fron sink")
+        }) { (val) in
+            print("received value fron sink",val)
+        }
+        
         subject.send("L")
         subject.send("ABC")
+        
+        subscription.cancel()
+        
         subject.send("E")
+        subject.send("F")
     }
 
     private func fillCodeFields(codeCharacter: String) {
