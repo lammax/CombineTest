@@ -12,6 +12,7 @@
 
 import UIKit
 import Combine
+import CoreGraphics
 
 class StringSubscriber: Subscriber {
     typealias Input = String
@@ -39,7 +40,7 @@ class ObserverSceneWorker {
     //        runObserver1()
     //        runObserver2()
     //        runObserver3()
-//            runObserver4()
+            runObserver4()
 //        runObserver5()
         runObserver6()
 
@@ -81,7 +82,7 @@ class ObserverSceneWorker {
         let subject = PassthroughSubject<String, ObserverScene.MyError>()
         subject.subscribe(subscriber)
         
-        let subscription = subject.sink(receiveCompletion: { (completion) in
+        let subscription = subject.map(\.count) .sink(receiveCompletion: { (completion) in
             print("received completion fron sink")
         }) { (val) in
             print("received value fron sink",val)
@@ -102,7 +103,8 @@ class ObserverSceneWorker {
     }
     
     private func runObserver6() { //Transformation operators
-        let sValues = ["A", "B", "C","D","E","F","G","H","I","J","K"]
+        //Collect
+        /*let sValues = ["A", "B", "C","D","E","F","G","H","I","J","K"]
         sValues.publisher.sink {
             print($0)
         }
@@ -111,12 +113,38 @@ class ObserverSceneWorker {
         }
         sValues.publisher.collect(2).sink {
             print($0)
-        }
+        }*/
         
-        let formatter = NumberFormatter()
+        //Map
+        /*let formatter = NumberFormatter()
         formatter.numberStyle = .spellOut
         let iValues = [12, 434, 6768, 24, 5, 7788]
-        iValues.publisher.map{ formatter.string(from: NSNumber(integerLiteral: $0)) ?? "" }.sink{ print($0) }
+        iValues.publisher.map{ formatter.string(from: NSNumber(integerLiteral: $0)) ?? "" }.sink{ print($0) }*/
+        
+        //Map keypath
+        let publisherCGP = PassthroughSubject<CGPoint, Never>()
+        let subscription = publisherCGP.map(\.x, \.y).sink { print("X is \($0), Y is \($1)") }
+        publisherCGP.send(CGPoint(x: 1, y: 2))
+        publisherCGP.send(CGPoint(x: 3, y: 4))
+        subscription.cancel()
+        
+        //Flatmap
+        let citySchool = ObserverScene.School(with: "Best school", and: 777)
+        let school = CurrentValueSubject<ObserverScene.School, Never>(citySchool)
+        let subscription2 = school
+            .flatMap({
+                $0.noOfStudents
+            })
+            .sink {
+                print($0)
+            }
+        
+        let townSchool = ObserverScene.School(with: "High school", and: 555)
+        school.value = townSchool
+        
+        citySchool.noOfStudents.value += 1
+        townSchool.noOfStudents.value += 1
+
         
     }
     

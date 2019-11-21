@@ -11,8 +11,19 @@
 //
 
 import UIKit
+import Combine
 
 enum ObserverScene {
+    
+    struct School {
+        let name: String
+        let noOfStudents: CurrentValueSubject<Int, Never>
+        
+        init(with name: String, and noOfStudents: Int) {
+            self.name = name
+            self.noOfStudents = CurrentValueSubject(noOfStudents)
+        }
+    }
     
     enum MyError: Error {
         case SomeError
