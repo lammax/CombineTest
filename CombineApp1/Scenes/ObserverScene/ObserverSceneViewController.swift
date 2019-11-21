@@ -20,19 +20,18 @@ protocol ObserverSceneDisplayLogic: class {
 
 class StringSubscriber: Subscriber {
     typealias Input = String
-    typealias Failure = Never
+    typealias Failure = ObserverScene.MyError
 
     func receive(subscription: Subscription) {
-        print("Received subscription")
-        subscription.request(.max(3)) //backpressure
+        subscription.request(.max(2)) //backpressure
     }
     
     func receive(_ input: String) -> Subscribers.Demand {
         print("Received value:", input)
-        return .unlimited
+        return .none
     }
     
-    func receive(completion: Subscribers.Completion<Never>) {
+    func receive(completion: Subscribers.Completion<ObserverScene.MyError>) {
         print("Completed")
     }
     
@@ -96,7 +95,8 @@ class ObserverSceneViewController: UIViewController {
         
 //        runObserver()
 //        runObserver2()
-        runObserver3()
+//        runObserver3()
+        runObserver4()
 
     }
     
@@ -127,8 +127,17 @@ class ObserverSceneViewController: UIViewController {
     private func runObserver3() {
         let publisher = ["A", "B", "C","D","E","F","G","H","I","J","K"].publisher
         let subscriber = StringSubscriber()
-        publisher.subscribe(subscriber)
+        //publisher.subscribe(subscriber)
         
+    }
+
+    private func runObserver4() { //Subjects
+        let subscriber = StringSubscriber()
+        let subject = PassthroughSubject<String, ObserverScene.MyError>()
+        subject.subscribe(subscriber)
+        subject.send("L")
+        subject.send("ABC")
+        subject.send("E")
     }
 
     private func fillCodeFields(codeCharacter: String) {

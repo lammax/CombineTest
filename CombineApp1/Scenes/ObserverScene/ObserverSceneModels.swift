@@ -14,6 +14,10 @@ import UIKit
 
 enum ObserverScene {
     
+    enum MyError: Error {
+        case SomeError
+    }
+    
   // MARK: Use cases
   
     enum Something {
@@ -25,61 +29,5 @@ enum ObserverScene {
         }
     }
     
-    
-    
-    
-    
-    enum GymList {
-        struct Request: Encodable {
-            let chain: Int
-        }
-        struct Response: Decodable {
-        }
-    }
-
-    enum ChainList {
-        struct Request: Encodable {
-            let chain: Int
-        }
-        struct Response: Decodable {
-            let isOK: Bool
-        }
-    }
-    
-    typealias GymListRequest = (GymList.Request) -> Void
-    typealias ChainListRequest = (ChainList.Request) -> Void
-
-    enum Requests {
-        case GymList(GymListRequest)
-        case ChainList(ChainListRequest)
-    }
-
-    typealias GymListCodable = (GymList.Request, GymList.Response) -> Void
-    typealias ChainListCodable = (ChainList.Request, ChainList.Response) -> Void
-
-    enum Codables {
-        case GymList(GymListCodable)
-        case ChainList(ChainListCodable)
-    }
-    
-    
-}
-
-class Somethig {
-    
-    func start() {
-        guard let url = URL(string: "http://google.ru") else { fatalError() }
-        
-        let urlRequest: URLRequest = URLRequest(url: url)
-        
-        let request: ObserverScene.ChainList.Request = ObserverScene.ChainList.Request(chain: 1)
-        
-        
-        
-        
-        let encodeClosure: (ObserverScene.Requests, (Data) -> ()) -> () = { requests, completion in
-            guard let data = try? JSONEncoder().encode(request) else { fatalError() }
-        }
-    }
     
 }
