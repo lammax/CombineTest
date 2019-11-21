@@ -12,10 +12,35 @@
 
 import UIKit
 import MessageUI
+import Combine
 
 protocol ObserverSceneDisplayLogic: class {
     func displaySomething(viewModel: ObserverScene.Something.ViewModel)
 }
+
+class StringSubscriber: Subscriber {
+    typealias Input = String
+    typealias Failure = Never
+
+    func receive(subscription: Subscription) {
+        print("Received subscription")
+        subscription.request(.max(3)) //backpressure
+    }
+    
+    func receive(_ input: String) -> Subscribers.Demand {
+        print("Received value:", input)
+        return .none
+    }
+    
+    func receive(completion: Subscribers.Completion<Never>) {
+        print("Completed")
+    }
+    
+    
+    
+    
+}
+
 
 class ObserverSceneViewController: UIViewController {
     var interactor: ObserverSceneBusinessLogic?
@@ -69,13 +94,14 @@ class ObserverSceneViewController: UIViewController {
         self.vcTF3.delegate = self
         self.vcTF4.delegate = self
         
-        runObserver()
-        runObserver2()
+//        runObserver()
+//        runObserver2()
+        runObserver3()
 
     }
     
     private func runObserver() {
-        let notification = Notification.Name("NotificationL")
+        let notification = Notification.Name("NotificationO1")
         let center = NotificationCenter.default
         
         /*let observer*/ _ = center.addObserver(forName: notification, object: nil, queue: OperationQueue()) { (notification) in
@@ -88,7 +114,7 @@ class ObserverSceneViewController: UIViewController {
     }
     
     private func runObserver2() {
-        let notification = Notification.Name("NotificationM")
+        let notification = Notification.Name("NotificationO2")
         let publisher = NotificationCenter.default.publisher(for: notification, object: nil)
         let subscription = publisher.sink { _ in
             print("Notification received 2")
@@ -96,6 +122,13 @@ class ObserverSceneViewController: UIViewController {
         subscription.cancel()
         NotificationCenter.default.post(name: notification, object: nil)
 
+    }
+
+    private func runObserver3() {
+        let publisher = ["A", "B", "C","D","E","F","G","H","I","J","K"].publisher
+        let subscriber = StringSubscriber()
+        publisher.subscribe(subscriber)
+        
     }
 
     private func fillCodeFields(codeCharacter: String) {
@@ -181,3 +214,4 @@ extension ObserverSceneViewController: UITextFieldDelegate {
         return updatedText.count <= 1
     }
 }
+
