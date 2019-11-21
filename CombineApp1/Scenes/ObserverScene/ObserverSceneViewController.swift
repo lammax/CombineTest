@@ -29,7 +29,7 @@ class StringSubscriber: Subscriber {
     
     func receive(_ input: String) -> Subscribers.Demand {
         print("Received value:", input)
-        return .none
+        return .unlimited
     }
     
     func receive(completion: Subscribers.Completion<Never>) {
