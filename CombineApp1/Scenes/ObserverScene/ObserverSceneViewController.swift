@@ -48,17 +48,6 @@ class ObserverSceneViewController: UIViewController {
         
     }
   
-    // MARK: Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-
     // MARK: View lifecycle
 
     override func viewDidLoad() {
@@ -69,16 +58,6 @@ class ObserverSceneViewController: UIViewController {
     // MARK: Do something
 
     func doOnDidLoad() {
-        let notification = Notification.Name("NotificationL")
-        let center = NotificationCenter.default
-        
-        /*let observer*/ _ = center.addObserver(forName: notification, object: nil, queue: OperationQueue()) { (notification) in
-            print("Notification received")
-        }
-        
-        center.post(name: notification, object: nil)
-        
-        center.removeObserver(notification)
         
         if #available(iOS 12.0, *) {
             self.vcTF1.textContentType = .oneTimeCode
@@ -90,6 +69,33 @@ class ObserverSceneViewController: UIViewController {
         self.vcTF3.delegate = self
         self.vcTF4.delegate = self
         
+        runObserver()
+        runObserver2()
+
+    }
+    
+    private func runObserver() {
+        let notification = Notification.Name("NotificationL")
+        let center = NotificationCenter.default
+        
+        /*let observer*/ _ = center.addObserver(forName: notification, object: nil, queue: OperationQueue()) { (notification) in
+            print("Notification received")
+        }
+        
+        center.post(name: notification, object: nil)
+        
+        center.removeObserver(notification)
+    }
+    
+    private func runObserver2() {
+        let notification = Notification.Name("NotificationM")
+        let publisher = NotificationCenter.default.publisher(for: notification, object: nil)
+        let subscription = publisher.sink { _ in
+            print("Notification received 2")
+        }
+        subscription.cancel()
+        NotificationCenter.default.post(name: notification, object: nil)
+
     }
 
     private func fillCodeFields(codeCharacter: String) {
@@ -141,7 +147,6 @@ extension ObserverSceneViewController: MFMessageComposeViewControllerDelegate {
     }
     
 }
-
 
 extension ObserverSceneViewController: ObserverSceneDisplayLogic {
     
