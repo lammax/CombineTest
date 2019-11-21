@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ObserverScenePresentationLogic {
-    func presentSomething(response: ObserverScene.Something.Response)
+    func presentObserver(response: ObserverScene.Observer.Response)
 }
 
 class ObserverScenePresenter: ObserverScenePresentationLogic {
@@ -21,9 +21,9 @@ class ObserverScenePresenter: ObserverScenePresentationLogic {
 
     // MARK: Do something
 
-    func presentSomething(response: ObserverScene.Something.Response) {
-        let viewModel = ObserverScene.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentObserver(response: ObserverScene.Observer.Response) {
+        let viewModel = ObserverScene.Observer.ViewModel()
+        viewController?.displayObserver(viewModel: viewModel)
     }
     
 }

@@ -20,7 +20,7 @@ enum ObserverScene {
     
   // MARK: Use cases
   
-    enum Something {
+    enum Observer {
         struct Request {
         }
         struct Response {

@@ -15,30 +15,9 @@ import MessageUI
 import Combine
 
 protocol ObserverSceneDisplayLogic: class {
-    func displaySomething(viewModel: ObserverScene.Something.ViewModel)
+    func displayObserver(viewModel: ObserverScene.Observer.ViewModel)
 }
 
-class StringSubscriber: Subscriber {
-    typealias Input = String
-    typealias Failure = ObserverScene.MyError
-
-    func receive(subscription: Subscription) {
-        subscription.request(.max(2)) //backpressure
-    }
-    
-    func receive(_ input: String) -> Subscribers.Demand {
-        print("Received value:", input)
-        return .max(1)
-    }
-    
-    func receive(completion: Subscribers.Completion<ObserverScene.MyError>) {
-        print("Completed")
-    }
-    
-    
-    
-    
-}
 
 
 class ObserverSceneViewController: UIViewController {
@@ -93,64 +72,10 @@ class ObserverSceneViewController: UIViewController {
         self.vcTF3.delegate = self
         self.vcTF4.delegate = self
         
-//        runObserver()
-//        runObserver2()
-//        runObserver3()
-        runObserver4()
+        runObserver()
 
     }
     
-    private func runObserver() {
-        let notification = Notification.Name("NotificationO1")
-        let center = NotificationCenter.default
-        
-        /*let observer*/ _ = center.addObserver(forName: notification, object: nil, queue: OperationQueue()) { (notification) in
-            print("Notification received")
-        }
-        
-        center.post(name: notification, object: nil)
-        
-        center.removeObserver(notification)
-    }
-    
-    private func runObserver2() {
-        let notification = Notification.Name("NotificationO2")
-        let publisher = NotificationCenter.default.publisher(for: notification, object: nil)
-        let subscription = publisher.sink { _ in
-            print("Notification received 2")
-        }
-        subscription.cancel()
-        NotificationCenter.default.post(name: notification, object: nil)
-
-    }
-
-    private func runObserver3() {
-        let publisher = ["A", "B", "C","D","E","F","G","H","I","J","K"].publisher
-        let subscriber = StringSubscriber()
-        //publisher.subscribe(subscriber)
-        
-    }
-
-    private func runObserver4() { //Subjects
-        let subscriber = StringSubscriber()
-        let subject = PassthroughSubject<String, ObserverScene.MyError>()
-        subject.subscribe(subscriber)
-        
-        let subscription = subject.sink(receiveCompletion: { (completion) in
-            print("received completion fron sink")
-        }) { (val) in
-            print("received value fron sink",val)
-        }
-        
-        subject.send("L")
-        subject.send("ABC")
-        
-        subscription.cancel()
-        
-        subject.send("E")
-        subject.send("F")
-    }
-
     private func fillCodeFields(codeCharacter: String) {
         currentTFTag += 1
         if currentTFTag > 1, let currentTF = view.viewWithTag(currentTFTag) as? UITextField {
@@ -170,6 +95,11 @@ class ObserverSceneViewController: UIViewController {
             textField.resignFirstResponder()
             print("Finish code entering")
         }
+    }
+    
+    private func runObserver() {
+        let request = ObserverScene.Observer.Request()
+        interactor?.runObserver(request: request)
     }
 
     @IBAction func buttonClicked(_ sender: UIButton) {
@@ -203,8 +133,8 @@ extension ObserverSceneViewController: MFMessageComposeViewControllerDelegate {
 
 extension ObserverSceneViewController: ObserverSceneDisplayLogic {
     
-    func displaySomething(viewModel: ObserverScene.Something.ViewModel) {
-        
+    func displayObserver(viewModel: ObserverScene.Observer.ViewModel) {
+        print("displayObserver")
     }
 
 }

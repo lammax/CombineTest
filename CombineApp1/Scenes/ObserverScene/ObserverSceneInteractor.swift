@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ObserverSceneBusinessLogic {
-    func doSomeLogic(request: ObserverScene.Something.Request)
+    func runObserver(request: ObserverScene.Observer.Request)
 }
 
 protocol ObserverSceneDataStore {
@@ -30,21 +30,15 @@ class ObserverSceneInteractor: ObserverSceneDataStore {
 
     // MARK: Do stuff
     
-    private func doSomething() {
-        let request = ObserverScene.Something.Request()
-        self.doSomeLogic(request: request)
-    }
-
 }
 
 extension ObserverSceneInteractor: ObserverSceneBusinessLogic {
     
-    func doSomeLogic(request: ObserverScene.Something.Request) {
-        worker = ObserverSceneWorker()
-        worker?.doSomeWork()
+    func runObserver(request: ObserverScene.Observer.Request) {
+        worker?.runObserver()
         
-        let response = ObserverScene.Something.Response()
-        presenter?.presentSomething(response: response)
+        let response = ObserverScene.Observer.Response()
+        presenter?.presentObserver(response: response)
     }
 
 }
