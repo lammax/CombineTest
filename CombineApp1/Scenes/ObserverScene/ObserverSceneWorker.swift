@@ -40,7 +40,8 @@ class ObserverSceneWorker {
     //        runObserver2()
     //        runObserver3()
 //            runObserver4()
-        runObserver5()
+//        runObserver5()
+        runObserver6()
 
     }
     
@@ -98,6 +99,25 @@ class ObserverSceneWorker {
     private func runObserver5() { //Type eraser
         let publisher = PassthroughSubject<Int, Never>().eraseToAnyPublisher()
         print(publisher.self)
+    }
+    
+    private func runObserver6() { //Transformation operators
+        let sValues = ["A", "B", "C","D","E","F","G","H","I","J","K"]
+        sValues.publisher.sink {
+            print($0)
+        }
+        sValues.publisher.collect().sink {
+            print($0)
+        }
+        sValues.publisher.collect(2).sink {
+            print($0)
+        }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .spellOut
+        let iValues = [12, 434, 6768, 24, 5, 7788]
+        iValues.publisher.map{ formatter.string(from: NSNumber(integerLiteral: $0)) ?? "" }.sink{ print($0) }
+        
     }
     
 }
