@@ -40,9 +40,10 @@ class ObserverSceneWorker {
     //        runObserver1()
     //        runObserver2()
     //        runObserver3()
-            runObserver4()
+//            runObserver4()
 //        runObserver5()
-        runObserver6()
+//        runObserver6()
+        runObserver7()
 
     }
     
@@ -122,14 +123,14 @@ class ObserverSceneWorker {
         iValues.publisher.map{ formatter.string(from: NSNumber(integerLiteral: $0)) ?? "" }.sink{ print($0) }*/
         
         //Map keypath
-        let publisherCGP = PassthroughSubject<CGPoint, Never>()
+        /*let publisherCGP = PassthroughSubject<CGPoint, Never>()
         let subscription = publisherCGP.map(\.x, \.y).sink { print("X is \($0), Y is \($1)") }
         publisherCGP.send(CGPoint(x: 1, y: 2))
         publisherCGP.send(CGPoint(x: 3, y: 4))
-        subscription.cancel()
+        subscription.cancel()*/
         
         //Flatmap
-        let citySchool = ObserverScene.School(with: "Best school", and: 777)
+        /*let citySchool = ObserverScene.School(with: "Best school", and: 777)
         let school = CurrentValueSubject<ObserverScene.School, Never>(citySchool)
         let subscription2 = school
             .flatMap({
@@ -143,9 +144,105 @@ class ObserverSceneWorker {
         school.value = townSchool
         
         citySchool.noOfStudents.value += 1
-        townSchool.noOfStudents.value += 1
-
+        townSchool.noOfStudents.value += 1*/
         
+        //replaceNil
+        /*["A", "B", nil, "C"]
+            .publisher
+            .replaceNil(with: "-")
+            .map { $0 ?? "" }
+            .sink {
+                print($0)
+            }*/
+        
+        //replaceEmpty
+        /*let empty = Empty<Int, Never>()
+        empty
+        .replaceEmpty(with: 1)
+        .sink(
+            receiveCompletion: { print($0) },
+            receiveValue: { print($0) }
+        )*/
+        
+        //scan operator
+        /*let publisher = (1...10).publisher
+        publisher.scan([]) { numbers, val -> [Int] in
+            numbers + [val]
+        }.sink { print($0) }*/
+        
+        //filter operator
+        /*let numbers = (1...20).publisher
+        numbers
+            .filter { $0 % 2 == 0 }
+            .sink { print($0) }*/
+        
+        //removeDuplicates
+        /*let words = "apple apple melon apple cucumber apple peach apple cherry".components(separatedBy: " ").publisher
+        words.removeDuplicates().sink {print($0)}*/
+        
+        //compactMap
+        /*let strings = ["2", "b", "0.2", "-", "123"].publisher
+        strings
+            .compactMap { Float($0) }
+            .sink { print($0) }*/
+        
+        //ignoreOutput
+        /*let numbers = (1...5000).publisher
+        numbers
+            .ignoreOutput()
+            .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })*/
+        
+        //first operator
+        /*let numbers = (1...9).publisher
+        numbers.first(where: { $0 % 2 == 0 })
+        .sink(receiveValue: { print($0) })*/
+
+        //last operator
+        /*let numbers = (1...9).publisher
+        numbers.last(where: { $0 % 2 == 0 })
+        .sink(receiveValue: { print($0) })*/
+        
+        //dropFirst operator
+        /*let numbers = (1...9).publisher
+        numbers.dropFirst()
+        .sink(receiveValue: { print($0) })*/
+
+        //dropWhile operator
+        /*let numbers = (1...9).publisher
+        numbers.drop(while: { $0 != 5 })
+        .sink(receiveValue: { print($0) })*/
+
+        //dropWhile operator
+        /*let isReady = PassthroughSubject<Void, Never>()
+        let taps = PassthroughSubject<Int, Never>()
+
+        let cancel = taps.drop(untilOutputFrom: isReady).sink {
+            print($0)
+        }
+            
+        (1...10).forEach { n in
+            taps.send(n)
+            if n == 5 {
+                isReady.send()
+            }
+        }*/
+        
+        //prefix operator
+        /*let numbers = (1...9).publisher
+        numbers.prefix(5)
+        .sink(receiveValue: { print($0) })*/
+        
+        //operators challenge
+        let numbers = (1...100).publisher
+        numbers
+            .dropFirst(50)
+            .prefix(20)
+            .filter { $0 % 2 == 0 }
+            .sink { print($0) }
+
+    }
+    
+    private func runObserver7() { //Combining operators
     }
     
 }
