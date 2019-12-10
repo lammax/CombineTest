@@ -306,7 +306,7 @@ class ObserverSceneWorker {
         //cancelable.cancel()
         
         //merge
-        let pub1 = PassthroughSubject<Int, Never>()
+       /* let pub1 = PassthroughSubject<Int, Never>()
         let pub2 = PassthroughSubject<Int, Never>()
         let pub3 = PassthroughSubject<String, Never>()
 
@@ -315,7 +315,25 @@ class ObserverSceneWorker {
         }
         
         pub2.send(5)
-        pub1.send(6)
+        pub1.send(6)*/
+        
+        //combineLatest
+        let pub1 = PassthroughSubject<Int, Never>()
+        let pub2 = PassthroughSubject<String, Never>()
+        
+        let publication = pub1.combineLatest(pub2).sink { (tuple) in
+            print(tuple)
+        }
+        
+        pub1.send(1)
+        pub2.send("a")
+        pub1.send(2)
+        pub2.send("b")
+        pub1.send(3)
+        pub2.send("c")
+        pub1.send(4)
+        pub2.send("d")
+
 
     }
     
