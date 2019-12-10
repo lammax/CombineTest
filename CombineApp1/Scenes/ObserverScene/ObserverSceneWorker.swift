@@ -243,6 +243,56 @@ class ObserverSceneWorker {
     }
     
     private func runObserver7() { //Combining operators
+        //prepend
+        /*let numbers = (1...5).publisher
+        let numbers2 = (500...510).publisher
+        
+        numbers
+            .prepend(6...10)
+            .prepend(-1, -2)
+            .prepend([12,43])
+            .prepend(numbers2)
+            .sink { print($0) }*/
+        
+        //append
+        /*let numbers = (1...5).publisher
+        let numbers2 = (500...510).publisher
+
+        numbers
+           .append(6...10)
+           .append(-1, -2)
+           .append(numbers2)
+           .sink { print($0) }*/
+        
+        //switchToLatest
+        /*let publisher1 = PassthroughSubject<String, Never>()
+        let publisher2 = PassthroughSubject<String, Never>()
+        
+        let publishers = PassthroughSubject<PassthroughSubject<String, Never>, Never>()
+        
+        let cancel = publishers.switchToLatest().sink { print($0) }
+        
+        publishers.send(publisher1)
+        publisher1.send("P1 - V1")
+        
+        publishers.send(publisher2)
+        publisher2.send("P2 - V1")
+        publisher1.send("P1 - V2")
+        publisher2.send("P2 - V2")*/
+        
+        //switchToLatest: 2nd example
+        let images = ["denver", "houston", "seattle"]
+        let taps = PassthroughSubject<Void, Never>()
+        
+        
+    }
+    
+    func getImage() -> AnyPublisher<UIImage?, Never> {
+        return Future<UIImage?, Never> { promise in
+            DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+                promise(.)
+            }
+        }
     }
     
 }
