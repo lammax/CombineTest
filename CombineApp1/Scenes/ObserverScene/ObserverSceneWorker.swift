@@ -306,8 +306,17 @@ class ObserverSceneWorker {
         //cancelable.cancel()
         
         //merge
+        let pub1 = PassthroughSubject<Int, Never>()
+        let pub2 = PassthroughSubject<Int, Never>()
+        let pub3 = PassthroughSubject<String, Never>()
+
+        let publication = pub1.merge(with: pub2).sink { (val) in
+            print(val)
+        }
         
-        
+        pub2.send(5)
+        pub1.send(6)
+
     }
     
     func getImage(images: [String], index: Int) -> AnyPublisher<UIImage?, Never> {
