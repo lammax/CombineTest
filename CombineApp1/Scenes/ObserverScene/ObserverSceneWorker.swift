@@ -281,18 +281,43 @@ class ObserverSceneWorker {
         publisher2.send("P2 - V2")*/
         
         //switchToLatest: 2nd example
-        let images = ["denver", "houston", "seattle"]
+        /*let images = ["denver", "houston", "seattle"]
+        var index = 0
         let taps = PassthroughSubject<Void, Never>()
+        
+        let cancelable = taps.map { _ in
+            self.getImage(images: images, index: index)
+        }.print().switchToLatest().sink {
+            print($0)
+        }
+        
+        taps.send()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+            index += 1
+            taps.send()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.5) {
+            index += 1
+            taps.send()
+        }*/
+        
+        //cancelable.cancel()
+        
+        //merge
         
         
     }
     
-    func getImage() -> AnyPublisher<UIImage?, Never> {
+    func getImage(images: [String], index: Int) -> AnyPublisher<UIImage?, Never> {
         return Future<UIImage?, Never> { promise in
-            DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                promise(.)
+            DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
+                promise(.success(UIImage(named: images[index])))
             }
-        }
+        }.print().map { $0 }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
     
 }
