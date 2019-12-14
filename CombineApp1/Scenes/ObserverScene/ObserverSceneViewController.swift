@@ -25,11 +25,13 @@ class ObserverSceneViewController: UIViewController {
     var router: (NSObjectProtocol & ObserverSceneRoutingLogic & ObserverSceneDataPassing)?
     
     private var currentTFTag: Int = 0
+    private let datePicker = UIDatePicker()
 
     @IBOutlet weak var vcTF1: UITextField!
     @IBOutlet weak var vcTF2: UITextField!
     @IBOutlet weak var vcTF3: UITextField!
     @IBOutlet weak var vcTF4: UITextField!
+    @IBOutlet weak var dateField: UITextField!
     
     // MARK: Object lifecycle
 
@@ -72,8 +74,36 @@ class ObserverSceneViewController: UIViewController {
         self.vcTF3.delegate = self
         self.vcTF4.delegate = self
         
+        datePicker.datePickerMode = .dateAndTime
+        if let localeID = Locale.preferredLanguages.first {
+            datePicker.locale = Locale(identifier: localeID)
+        }
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButon = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        toolbar.setItems([flexSpace,doneButon], animated: true)
+        dateField.inputAccessoryView = toolbar
+        datePicker.addTarget(self, action: #selector(getDateFromPicker), for: .valueChanged)
+        let weekAgo = Calendar.current.date(byAdding: .day, value: -7, to: Date())
+        let weekLater = Calendar.current.date(byAdding: .day, value: 7, to: Date())
+        datePicker.minimumDate = weekAgo
+        datePicker.maximumDate = weekLater
+
+        dateField.inputView = datePicker
+        
         runObserver()
 
+    }
+    
+    @objc func doneAction() {
+        view.endEditing(true)
+    }
+    
+    @objc func getDateFromPicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy HH:mm"
+        dateField.text = formatter.string(from: datePicker.date)
     }
     
     private func fillCodeFields(codeCharacter: String) {

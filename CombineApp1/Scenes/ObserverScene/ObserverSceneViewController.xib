@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ObserverSceneViewController" customModule="CombineApp1" customModuleProvider="target">
             <connections>
+                <outlet property="dateField" destination="UYE-Ik-Hcy" id="T5s-8W-8jW"/>
                 <outlet property="vcTF1" destination="yJk-Qp-vz9" id="TXd-Ue-laG"/>
                 <outlet property="vcTF2" destination="Lrn-pf-2dF" id="rx3-lz-4BW"/>
                 <outlet property="vcTF3" destination="BWg-YT-zJH" id="bJD-dL-igU"/>
@@ -78,11 +79,22 @@
                         <action selector="buttonClicked:" destination="-1" eventType="touchUpInside" id="jhu-o8-aNY"/>
                     </connections>
                 </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UYE-Ik-Hcy">
+                    <rect key="frame" x="121" y="296.5" width="172" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="172" id="B7y-eL-qyq"/>
+                        <constraint firstAttribute="height" constant="34" id="I7e-sM-j34"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="UYE-Ik-Hcy" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.7" id="ETH-E0-t4O"/>
                 <constraint firstItem="iop-hc-gZx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="163" id="L9l-MO-3Za"/>
                 <constraint firstItem="iop-hc-gZx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Yq6-7f-kSr"/>
+                <constraint firstItem="UYE-Ik-Hcy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="auT-LR-XJ5"/>
                 <constraint firstItem="SxY-SM-bBS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pDp-KV-iix"/>
                 <constraint firstItem="SxY-SM-bBS" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="teI-sh-M6m"/>
             </constraints>

@@ -43,7 +43,8 @@ class ObserverSceneWorker {
 //            runObserver4()
 //        runObserver5()
 //        runObserver6()
-        runObserver7()
+//        runObserver7()
+        runObserver8()
 
     }
     
@@ -335,7 +336,7 @@ class ObserverSceneWorker {
         pub2.send("d")*/
  
         //zip
-        let pub1 = PassthroughSubject<Int, Never>()
+        /*let pub1 = PassthroughSubject<Int, Never>()
         let pub2 = PassthroughSubject<String, Never>()
         
         let publication = pub1.zip(pub2).sink { (tuple) in
@@ -349,7 +350,7 @@ class ObserverSceneWorker {
         pub1.send(3)
         pub2.send("c")
         pub1.send(4)
-        pub2.send("d")
+        pub2.send("d")*/
 
 
 
@@ -363,6 +364,66 @@ class ObserverSceneWorker {
         }.print().map { $0 }
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
+    }
+    
+    private func runObserver8() { //Sequence operators
+        //min & max
+        /*let publisher = [1, -3, 8, 23,-100, 1000].publisher
+        publisher
+            .min()
+            .sink { print($0) }
+        publisher
+            .max()
+            .sink { print($0) }*/
+        
+        //first & last
+        /*let publisher = [1, -3, 8, 23,-100, 1000].publisher
+        publisher
+            .first()
+            .sink { print($0) }
+        publisher
+            .first(where: { $0 > 9 })
+            .sink { print($0) }
+        publisher
+            .last()
+            .sink { print($0) }*/
+        
+        //output
+        /*let publisher = ["A", "B", "C", "D"].publisher
+        publisher.output(at: 2).sink{ print($0) }
+        publisher.output(in: 0...2).sink{ print($0) }*/
+        
+        //count
+        /*let publisher = ["A", "B", "C", "D"].publisher
+        publisher.count().sink{ print($0) }
+        let publisher1 = PassthroughSubject<Int, Never>()
+        let cancel = publisher1.count().sink { print($0) }
+        publisher1.send(1)
+        publisher1.send(2)
+        publisher1.send(completion: .finished)
+        publisher1.send(3)
+        publisher1.send(4)
+        publisher1.send(completion: .finished)*/
+        
+        //contains
+        /*let publisher = ["A", "B", "C", "D"].publisher
+        publisher.contains("B").sink { print($0) }*/
+        
+        //allSatisfy
+        /*let publisher = [1, -3, 8, 23,-100, 1000].publisher
+        publisher
+            .allSatisfy {$0 > 3}
+            .sink { print($0) }*/
+        
+        //reduce
+        /*let publisher = [1, -3, 8, 23,-100, 1000].publisher
+        publisher
+            .reduce(0, { $0 + $1 })
+            .sink { print($0) }*/
+        
+
+
+        
     }
     
 }
