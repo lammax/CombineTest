@@ -38,6 +38,7 @@ class ObserverSceneWorker {
     
     var subscription: Cancellable?
     var subscription2: Cancellable?
+    var subscription3: Cancellable?
     var anySubscription: AnyCancellable?
     
 
@@ -567,7 +568,7 @@ class ObserverSceneWorker {
         )*/
 
         // 2 - Share
-        let request = URLSession.shared.dataTaskPublisher(for: url).map(\.data).print().share()
+        /*let request = URLSession.shared.dataTaskPublisher(for: url).map(\.data).print().share()
 
         subscription = request.sink(
             receiveCompletion: { _ in },
@@ -583,11 +584,33 @@ class ObserverSceneWorker {
                 receiveCompletion: { _ in },
                 receiveValue: { print($0) }
             )
-        }
+        }*/
 
 
         // 3 - Multicast
+        let subject = PassthroughSubject<Data, URLError>()
         
+        let request = URLSession.shared.dataTaskPublisher(for: url).map(\.data).print().multicast(subject: subject)
+
+        subscription = request.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { print($0) }
+        )
+        subscription2 = request.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { print($0) }
+        )
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.anySubscription = request.sink(
+                receiveCompletion: { _ in },
+                receiveValue: { print($0) }
+            )
+            self.subscription3 = request.connect()
+        }
+        
+        subscription3 = request.connect()
+        subject.send(Data())
     }
     
 }
