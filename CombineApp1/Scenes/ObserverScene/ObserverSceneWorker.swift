@@ -35,7 +35,13 @@ class StringSubscriber: Subscriber {
 
 
 class ObserverSceneWorker {
-  
+    
+    var subscription: Cancellable?
+    var subscription2: Cancellable?
+    var anySubscription: AnyCancellable?
+    
+
+
     func runObserver() {
     //        runObserver1()
     //        runObserver2()
@@ -44,7 +50,11 @@ class ObserverSceneWorker {
 //        runObserver5()
 //        runObserver6()
 //        runObserver7()
-        runObserver8()
+//        runObserver8()
+//        runObserver9()
+//        runObserver10()
+//        runObserver11()
+        runObserver12()
 
     }
     
@@ -356,7 +366,7 @@ class ObserverSceneWorker {
 
     }
     
-    func getImage(images: [String], index: Int) -> AnyPublisher<UIImage?, Never> {
+    /*func getImage(images: [String], index: Int) -> AnyPublisher<UIImage?, Never> {
         return Future<UIImage?, Never> { promise in
             DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
                 promise(.success(UIImage(named: images[index])))
@@ -364,7 +374,7 @@ class ObserverSceneWorker {
         }.print().map { $0 }
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
-    }
+    }*/
     
     private func runObserver8() { //Sequence operators
         //min & max
@@ -423,6 +433,160 @@ class ObserverSceneWorker {
         
 
 
+        
+    }
+    
+    private func runObserver9() { //Combine for networking
+        // 1 - URLSession
+        let cancellable = getPosts()
+            .receive(on: DispatchQueue.global())
+            .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
+        // 2 - Codable support
+        // 3 - Displaying posts on a table view
+    }
+    
+    struct Post: Codable {
+        let userId: Int
+        let id: Int
+        let title: String
+        let body: String
+    }
+    
+    func getPosts() -> AnyPublisher<[Post], Error> {
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts") else {
+            fatalError("Invalid url")
+        }
+        
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: [Post].self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+        
+    }
+    
+    private func runObserver10() { //Debugging Combine
+        //1 - Printing events
+        /*let publisher = (1...20).publisher
+        publisher
+            .print("Debugging")
+            .sink { print($0) }*/
+        
+        //2 - Acting on events - performing side effects
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts") else {
+            fatalError("Invalid url")
+        }
+        
+        let request = URLSession.shared.dataTaskPublisher(for: url)
+        anySubscription = request
+            .handleEvents(
+                receiveSubscription: { _ in print("Subscription received") },
+                receiveOutput: { _, _ in print("Received output") },
+                receiveCompletion: { _ in print("Received completion") },
+                receiveCancel: { print("Received cancel") },
+                receiveRequest: { _ in print("Received request") }
+            )
+            .sink(
+                receiveCompletion: { print($0) },
+                receiveValue: { (data, response) in
+                    print(data)
+                }
+            )
+            
+            /*.map { $0.data }
+            .decode(type: [Post].self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()*/
+        
+        //3 - Using debugger
+        //detached app
+        
+    }
+    
+    private func runObserver11() { //Combine timers
+        // 1 - Using Run loop
+        /*let runLoop = RunLoop.main
+        subscription = runLoop.schedule(
+            after: runLoop.now,
+            interval: .seconds(2),
+            tolerance: .milliseconds(100)
+            ) {
+                print("Timer fired")
+            }
+        runLoop.schedule(after: .init(Date(timeIntervalSinceNow: 3.0))) { [weak self] in
+            print("subscription cancelled")
+            self?.subscription?.cancel()
+        }*/
+        
+        // 2 - Timer class
+        /*anySubscription = Timer.publish(every: 1.0, on: .main, in: .common)
+            .autoconnect()
+            .scan(0) { counter, _ in
+                counter + 1
+        }
+            .sink { (val) in
+                print(val)
+        }*/
+        
+        // 3 - Using DispatchQueue
+        
+        var counter = 0
+        
+        let queue = DispatchQueue.global(qos: .userInteractive)
+        let sourceInt = PassthroughSubject<Int, Never>()
+        
+        subscription2 = queue.schedule(
+            after: queue.now,
+            interval: .seconds(1)) {
+                sourceInt.send(counter)
+                counter += 1
+        }
+        
+        subscription = sourceInt.sink(receiveValue: { (val) in
+            print(val)
+        })
+        
+    }
+    
+    private func runObserver12() { //Resources in Combine
+        // 1 - Understanding the problem
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts") else {
+            fatalError("Invalid url")
+        }
+        
+        /*let request = URLSession.shared.dataTaskPublisher(for: url).map(\.data).print()
+            
+        subscription = request.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { print($0) }
+        )
+        subscription2 = request.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { print($0) }
+        )*/
+
+        // 2 - Share
+        let request = URLSession.shared.dataTaskPublisher(for: url).map(\.data).print().share()
+
+        subscription = request.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { print($0) }
+        )
+        subscription2 = request.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { print($0) }
+        )
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.anySubscription = request.sink(
+                receiveCompletion: { _ in },
+                receiveValue: { print($0) }
+            )
+        }
+
+
+        // 3 - Multicast
         
     }
     

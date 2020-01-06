@@ -74,6 +74,8 @@ class ObserverSceneViewController: UIViewController {
         self.vcTF3.delegate = self
         self.vcTF4.delegate = self
         
+        //MARK: DatePicker
+        //TODOL add as subview + animation + programmaticaly
         datePicker.datePickerMode = .dateAndTime
         if let localeID = Locale.preferredLanguages.first {
             datePicker.locale = Locale(identifier: localeID)
